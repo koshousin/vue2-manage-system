@@ -7,5 +7,9 @@ Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  router
+  router,
+  beforeCreate() {
+    /* 添加事件总线 */
+    Vue.prototype.$bus = this;
+  }
 }).$mount('#app')

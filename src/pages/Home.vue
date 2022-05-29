@@ -4,7 +4,11 @@
       <v-aside/>
       <main>
         <Tag/>
-        <router-view></router-view>
+        <div class="content">
+          <keep-alive include="Dashboard">
+            <router-view></router-view>
+          </keep-alive>
+        </div>
       </main>
     </div>
 </template>
@@ -21,4 +25,11 @@
   }
 </script>
 <style scoped>
+  .content{
+    height:calc(100% - 4rem);
+    overflow:auto;
+  }
+  main {
+    background-color:rgb(240,240,240);
+  }
 </style>

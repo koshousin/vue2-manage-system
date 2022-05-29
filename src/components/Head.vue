@@ -1,11 +1,12 @@
 <template>
   <header>
-    <i class="el-icon-s-unfold"></i>
+    <i @click="changeCollapse" v-show="!isFold" class="el-icon-s-fold"></i>
+    <i @click="changeCollapse" v-show="isFold" class="el-icon-s-unfold"></i>
     <span>后台管理系统</span>
     <div class="empty"></div>
     <Tooltip content="全屏">
       <Button>
-        <i class="el-icon-rank rotate"></i>
+        <i  class="el-icon-rank rotate"></i>
       </Button>
     </Tooltip>
     <Badge :value="2">
@@ -36,10 +37,17 @@
                 DropdownItem,DropdownMenu,Dropdown},
     data(){
       return {
-        avatar
+        avatar ,
+        isFold:false
       }
     },
-    
+    methods:{
+      
+      changeCollapse(){
+        this.isFold = !this.isFold;
+        this.$bus.$emit('changeCollapse');
+      }
+    }
   }
 </script>
 

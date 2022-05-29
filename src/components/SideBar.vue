@@ -1,10 +1,12 @@
 <template>
     <aside>
       <Menu
+        class="el-menu-vertical-demo"
         background-color= rgb(50,65,87)
         text-color=rgb(191,203,217)
         :collapse="isCollapse" 
         router 
+        :collapse-transition="true"
         unique-opened>
         <template  v-for="option in options">
           <MenuItem v-if="!option.subs" :index="option.index" :key="option.index">
@@ -138,15 +140,20 @@
         ],
         isCollapse : false,
       }
+    } ,
+    mounted(){
+      this.$bus.$on('changeCollapse',()=>{
+        this.isCollapse = !this.isCollapse;
+      });
     }
   }
 </script>
 <style scoped>
-   .el-menu-vertical-demo:not(.el-menu--collapse) {
+  
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 25rem;
     min-height: 400px;
   }
-  
   li:hover{
     background-color:rgb(40,52,71) !important;
   }
