@@ -40,6 +40,19 @@ aside , main {
 main {
   flex : 1;
 }
+/* 路由页面的基本样式 */
+.route-wrapper{
+  padding:1rem 2rem;
+}
+.route-content{
+  padding:3rem;
+  background-color: #fff;
+}
+.route-head {
+  padding:1rem;
+  font-size :1.3rem;
+}
+
 /* 近似隐藏滚动条样式 */
 ::-webkit-scrollbar {
   width: 0.1rem;
