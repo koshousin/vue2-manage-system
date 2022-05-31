@@ -8,8 +8,9 @@
       </div>
       <div class="route-content">
         <quillEditor
-          style="margin-bottom:2rem;"
+          style="margin-bottom:2rem;height:30rem;"
          :content="content"></quillEditor>
+         <Button type="primary" style="margin-top:10rem;">提交</Button>
       </div>
     </div>
 </template>
@@ -18,13 +19,14 @@
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
   import { quillEditor } from 'vue-quill-editor'
-  import {Breadcrumb,BreadcrumbItem} from 'element-ui'
+  import {Breadcrumb,BreadcrumbItem,Button} from 'element-ui'
   export default {
     name:'Editor',
     components: {
       quillEditor,
       Breadcrumb,
       BreadcrumbItem,
+      Button
     },
     data(){
       return {
@@ -34,4 +36,7 @@
   }
 </script>
 <style scoped>
+  .route-content{
+    height:50rem;
+  }
 </style>

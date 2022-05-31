@@ -73,14 +73,6 @@ const router = new VueRouter({
           },
         },
         {
-          name: "icon",
-          path: "/icon",
-          component: () => import("../pages/Icon.vue"),
-          meta: {
-            name: "自定义图标",
-          },
-        },
-        {
           name: "charts",
           path: "/charts",
           component: () => import("../pages/Charts.vue"),

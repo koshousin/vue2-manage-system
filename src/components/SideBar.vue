@@ -2,12 +2,13 @@
     <aside>
       <Menu
         class="el-menu-vertical-demo"
-        background-color= rgb(50,65,87)
+        background-color= "#324157"
         text-color=rgb(191,203,217)
-        :collapse="isCollapse" 
+        unique-opened
         router 
+        :collapse="isCollapse" 
         :collapse-transition="true"
-        unique-opened>
+      >
         <template  v-for="option in options">
           <MenuItem v-if="!option.subs" :index="option.index" :key="option.index">
             <i :class="option.icon"></i>
@@ -18,7 +19,6 @@
               <i :class="option.icon"></i>
               <span slot="title">{{option.title}}</span>
             </template>
-
             <MenuItemGroup>
               <template v-for="subItem in option.subs">
                 <MenuItem v-if="!subItem.subs" :index="subItem.index" :key="subItem.index">
@@ -93,11 +93,6 @@
                     ]
                 },
                 {
-                    icon: 'el-icon-collection-tag',
-                    index: 'icon',
-                    title: '自定义图标'
-                },
-                {
                     icon: 'el-icon-pie-chart',
                     index: 'charts',
                     title: 'schart图表'
@@ -149,10 +144,12 @@
   }
 </script>
 <style scoped>
-  
+  aside {
+    background-color:rgb(50,65,87);
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 25rem;
-    min-height: 400px;
+    
   }
   li:hover{
     background-color:rgb(40,52,71) !important;

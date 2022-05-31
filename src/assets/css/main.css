@@ -43,6 +43,7 @@ main {
 /* 路由页面的基本样式 */
 .route-wrapper{
   padding:1rem 2rem;
+  color:rgb(96,98,102);
 }
 .route-content{
   padding:3rem;
