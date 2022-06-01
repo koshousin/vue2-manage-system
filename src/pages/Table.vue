@@ -2,8 +2,7 @@
   <div class="route-wrapper">
     <div class="route-head">
       <Breadcrumb separator-class="el-icon-arrow-right">
-        <BreadcrumbItem :to="{path:'/tabs'}">首页</BreadcrumbItem>
-        <BreadcrumbItem>我的</BreadcrumbItem>
+        <BreadcrumbItem>基础表格</BreadcrumbItem>
       </Breadcrumb>
     </div> 
     <div class="route-content">
@@ -24,30 +23,41 @@
       ></MyInput>
       <Button type="primary" size="small" icon="el-icon-search">搜索</Button>
       <MyTable
-        :data="tableData"
-        style="margin-top:2rem;"
+        size="medium"
+        style="margin-top:2rem;text-align:center;"
+        :data="persons.list"
         :border="true"
       >
-        <TableColumn type="selection" width="55"></TableColumn>
-        <TableColumn prop="id" label="ID" width="55"></TableColumn>
-        <TableColumn prop="userName" label="用户名" width="100"></TableColumn>
-        <TableColumn prop="balance" label="账户余额" width="100"></TableColumn>
-        <TableColumn prop="address" label="地址" width="200"></TableColumn>
-        <TableColumn prop="status" label="状态" width="100">
+        <TableColumn type="selection" align="center" min-width="20"></TableColumn>
+        <TableColumn prop="id" align="center" label="ID" min-width="35"></TableColumn>
+        <TableColumn prop="name" align="center" label="用户名" min-width="50"></TableColumn>
+        <TableColumn prop="money" align="center" label="账户余额" min-width="50"></TableColumn>
+        <TableColumn prop="address" align="center" label="地址" min-width="150"></TableColumn>
+        <TableColumn prop="state" align="center" label="状态" min-width="50">
           <template slot-scope="scope">
-            <Tag :type="scope.row.status == '成功' ? 'success':'danger'">{{scope.row.status}}</Tag>
+            <Tag :type="scope.row.state == '成功' ? 'success':'danger'">{{scope.row.state}}</Tag>
           </template>
         </TableColumn>
-        <TableColumn prop="registered" label="注册时间" width="150"></TableColumn>
-        <TableColumn label="操作" width="100"></TableColumn>
+        <TableColumn prop="date" align="center" label="注册时间" min-width="150"></TableColumn>
+        <TableColumn label="操作" align="center" min-width="100">
+          <Button type="primary" size="mini">编辑</Button>
+          <Button type="danger" size="mini">删除</Button>
+        </TableColumn>
       </MyTable>
+      <Pagination
+        background
+        style="margin:2rem;"
+        layout="prev, pager, next"
+        :page-count="persons.pageTotal">
+      </Pagination>
     </div>
   </div>
 
 </template>
 <script>
+  import {mapActions,mapState} from 'vuex'
   import {Button,Select,Option,Input,Breadcrumb,
-          BreadcrumbItem,Table,TableColumn,Tag} from 'element-ui'
+          BreadcrumbItem,Table,TableColumn,Tag,Pagination} from 'element-ui'
   export default {
       name:'Table',
       components:{Button,
@@ -58,6 +68,7 @@
                   BreadcrumbItem,
                   MyTable:Table,
                   TableColumn,
+                  Pagination,
                   Tag},
       data(){
         return {
@@ -102,14 +113,27 @@
             ]
         }
       },
+      computed:{
+        ...mapState('personAbout',['persons'])
+      },
       methods:{
+        ...mapActions('personAbout',['getPersonList']),
         handleSelectionChange(){
-
+        
         }
+      },
+      mounted(){
+        this.getPersonList();
       }
   }
 </script>
 <style scoped>
+  .el-pagination{
+    text-align:center;
+  }
+  .cell {
+    text-align:center;
+  }
   .my-select {
     width:10rem;
     margin:0 3rem;

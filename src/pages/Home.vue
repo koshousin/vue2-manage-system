@@ -5,9 +5,11 @@
       <main>
         <Tag/>
         <div class="content">
-          <keep-alive include="Dashboard">
-            <router-view></router-view>
-          </keep-alive>
+            <keep-alive include="Dashboard">
+              <transition name="page">
+                <router-view></router-view>
+              </transition>
+            </keep-alive>
         </div>
       </main>
     </div>
@@ -31,5 +33,14 @@
   }
   main {
     background-color:rgb(240,240,240);
+  }
+  .page-enter , .page-leave-to {
+    opacity:0;
+  }
+  .page-enter-active,.page-leave-active {
+    transition:opacity 0.25s ease;
+  }
+  .page-enter-to,.page-leave {
+    opacity:1;
   }
 </style>

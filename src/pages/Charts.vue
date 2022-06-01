@@ -36,8 +36,8 @@
               :chart-data="pieItems.data"
               chart-id="pie-chart"
               dataset-id-key="pie"
-              :height="300"
-              :width="300"
+              :height="400"
+              :width="400"
             />
           </div>
         </div>
@@ -48,12 +48,11 @@
               :chart-options="doughnutItems.options"
               :chart-data="doughnutItems.data"
               chart-id="doughnut-chart"
-              :height="200"
-              :width="200"
+              :height="400"
+              :width="400"
             />
           </div>
         </div>
-        
       </div>
     </div>
 </template>
@@ -113,6 +112,15 @@
           },
           options: {
             responsive: true,
+            // animations: {
+            //   tension: {
+            //     duration: 1000,
+            //     easing: 'linear',
+            //     from: 1,
+            //     to: 0,
+            //     loop: true
+            //   }
+            // },
             plugins:{
               title:{
                 display:true,
@@ -122,18 +130,25 @@
                 text:'最近几个月各类品销售趋势图'
               },
             },
+            elements:{
+              point :{
+                pointStyle:'triangle'
+              }
+            }
           }
         },
         pieItems:{
           data:{
             labels:['T恤','牛仔裤','连衣裙','毛衣','七分裤','短裙','羽绒服'],
-            datasets:{
+            datasets:[{
               backgroundColor:['#4A90E2','#F5A623','#FF5858','#94,100,255','#2AC766','#743EE2','#B554FF'],
-              data:[141,334,278,190,235,260,200]
-            }
+              data:[141,334,278,190,235,260,200],
+              label: 'My First Dataset',
+            }]
           },
           options:{
             responsive:true,
+            maintainAspectRatio: false,
             plugins:{
               title:{
                 display:true,
@@ -156,7 +171,13 @@
             ],
           },
           options:{
-            responsive:true
+            responsive:true,
+            maintainAspectRatio: false,
+            plugins:{
+              title:{
+                position:'left'
+              }
+            }
           }
         }
       }
@@ -173,8 +194,8 @@
   }
   .chart-display {
     background-color:rgb(251,251,251);
-    width:70rem;
-    height:55rem;
-    padding:8rem;
+    width:60rem;
+    height:50rem;
+    padding:3rem;
   }
 </style>

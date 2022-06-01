@@ -4,15 +4,13 @@
     <i @click="changeCollapse" v-show="isFold" class="el-icon-s-unfold"></i>
     <span>后台管理系统</span>
     <div class="empty"></div>
-    <Tooltip content="全屏">
-      <Button>
-        <i  class="el-icon-rank rotate"></i>
-      </Button>
+    <Tooltip :content="isFullScreen ? '取消全屏':'全屏' ">
+        <i @click="handleClick"  class="el-icon-rank rotate"></i>
     </Tooltip>
     <Badge :value="2">
-      <Button>
+      <Tooltip content="dfafd">
         <i class="el-icon-chat-dot-square"></i>
-      </Button>
+      </Tooltip>
     </Badge>
     <Avatar :src="avatar"></Avatar>
     <Dropdown trigger="click">
@@ -28,24 +26,50 @@
 </template>
 
 <script>
-  import {Tooltip,Button,Badge,Avatar,
+  import {Tooltip,Badge,Avatar,
     DropdownMenu,DropdownItem,Dropdown} from 'element-ui'
   import avatar from '../assets/img/avatar.jpg'
   export default {
     name:'Head',
-    components:{Tooltip,Button,Badge,Avatar,
+    components:{Tooltip,Badge,Avatar,
                 DropdownItem,DropdownMenu,Dropdown},
     data(){
       return {
         avatar ,
-        isFold:false
+        isFold:false,
+        isFullScreen:false
       }
     },
     methods:{
-      
       changeCollapse(){
         this.isFold = !this.isFold;
         this.$bus.$emit('changeCollapse');
+      } ,
+      handleClick(){
+        const element = document.documentElement;
+        if(this.isFullScreen){
+          if (document.exitFullscreen) {
+              document.exitFullscreen();
+          } else if (document.webkitCancelFullScreen) {
+              document.webkitCancelFullScreen();
+          } else if (document.mozCancelFullScreen) {
+              document.mozCancelFullScreen();
+          } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+          }
+        }else {
+          if (element.requestFullscreen) {
+              element.requestFullscreen();
+          } else if (element.webkitRequestFullScreen) {
+              element.webkitRequestFullScreen();
+          } else if (element.mozRequestFullScreen) {
+              element.mozRequestFullScreen();
+          } else if (element.msRequestFullscreen) {
+              // IE11
+              element.msRequestFullscreen();
+          }
+        }
+        this.isFullScreen = !this.isFullScreen;
       }
     }
   }
@@ -62,14 +86,8 @@
   i,span {
     color :#fff;
   }
-  button {
-    background-color:transparent;
-    border:none;
-    font-size:2.5rem;
-    padding:0;
-  }
-  button:hover {
-    background-color:transparent;
+  i:hover{
+    cursor:pointer;
   }
   .rotate {
     transform:rotate(45deg);

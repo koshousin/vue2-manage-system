@@ -118,6 +118,7 @@ const router = new VueRouter({
           component: () => import("../pages/Permission.vue"),
           meta: {
             name: "权限测试",
+            isAuth:true
           },
         },
       ],
@@ -131,7 +132,12 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  next();
+  if (to.meta.isAuth) {
+    next();
+  } else {
+    next();
+  }
+ 
 });
 /* 利用后置路由守卫添加标签 */
 router.afterEach((to, from) => {

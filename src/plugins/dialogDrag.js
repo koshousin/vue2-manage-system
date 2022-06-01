@@ -1,5 +1,6 @@
 export default {
   install: function (Vue) {
+    // 注册全局拖拽指令
     Vue.directive("dialogDrag", {
       bind(el) {
         console.log('bind...');

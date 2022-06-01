@@ -223,7 +223,6 @@
   .one{
     display:flex;
     flex-wrap:wrap;
-    height:25rem;
     grid-row: 1 / 3;
     align-items:center;
   }
@@ -316,7 +315,7 @@
     cursor:pointer;
   }
   .todoList{
-    height:30rem;
+    height:90%;
     overflow:auto;
   }
   .todoItem{
