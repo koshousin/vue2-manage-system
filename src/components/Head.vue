@@ -13,13 +13,17 @@
       </Tooltip>
     </Badge>
     <Avatar :src="avatar"></Avatar>
-    <Dropdown trigger="click">
+    <Dropdown 
+      trigger="click" 
+      @command="handleExit">
       <span class="el-dropdown-link">
         admin<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
-      <DropdownMenu >
-        <DropdownItem>项目仓库</DropdownItem>
-        <DropdownItem>退出登录</DropdownItem>
+      <DropdownMenu>
+        <DropdownItem command="repo">
+          <a href="https://github.com/koshousin/vue2-manage-system.git" target="_blank">项目仓库</a> 
+        </DropdownItem>
+        <DropdownItem command="exit">退出登录</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   </header>
@@ -70,6 +74,11 @@
           }
         }
         this.isFullScreen = !this.isFullScreen;
+      },
+      handleExit(dir){
+        if(dir === 'exit'){
+          this.$router.replace('/login');
+        }
       }
     }
   }

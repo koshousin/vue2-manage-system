@@ -1,21 +1,23 @@
 import axios from 'axios'
-const ajax = async function (url, data = {},type='GET') {
+/* 全部用 post 请求 */
+const ajax = async function (url, data = {}) {
   return new Promise((resolve, reject) => {
     let promise;
-    if (type == 'GET') {
-      console.log(url);
-      promise = axios.get(url);
-    } else {
-      promise = axios.post(url,JSON.stringify(data));
-    }
-
+    const query = Object.keys(data).reduce((pre, cur, index) => {
+      return pre + `${cur}=${data[cur]}` + '&';
+    }, '').slice(0,-1);
+    promise = axios({
+      method: 'post',
+      url: url,
+      // params 放在路径参数上
+      params:data   
+    });
     promise.then(response => {
       return resolve(response.data);
     }).catch(err => {
       console.log('返回数据错误。', err);
       return reject('error');
     })
-
   })
 }
 

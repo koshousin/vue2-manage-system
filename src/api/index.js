@@ -7,5 +7,6 @@ export const reqPersons = () => ajax('/persons');
 
 
 /* 后台请求 */
-export const reqLogin = ({ username, password }) => ajax(BASE_URL + '/login',
-                                          { username, password },'post');
+// 用户请求
+export const reqLogin = ({ name, password }) => ajax(BASE_URL + '/users/login',{ name, password });
+export const reqRegister = ({name, password,date}) => ajax(BASE_URL + "/users/register", { name, password,date});
