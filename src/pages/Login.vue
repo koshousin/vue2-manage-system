@@ -45,6 +45,7 @@
 </template>
 <script>
   import {Input,Button,Message} from 'element-ui'
+  import dayjs from 'dayjs'
   import {mapActions} from 'vuex'
   export default {
     name:'Login',
@@ -54,27 +55,59 @@
         name:'',
         password:'',
         date:'',
-        isLogin:false,
+        isLogin:true,
       }
     },
     methods:{
       ...mapActions('loginAbout',['getLoginInfo','getRegister']),
       onSubmit(){
+        if(!this.name || !this.password){
+          Message({
+            type:'warning',
+            message:'请输入完整信息'
+          })
+          return;
+        }
+        // 登录
         if(this.isLogin){
           this.getLoginInfo({
             name:this.name,
             password:this.password
           }).then(value => {
+            // 登录成功
             Message({
               message:value,
               type:'success'
             });
+            this.$router.push('/dashboard');
           }).catch(err => {
+            // 登陆失败
             Message({
               message:err,
               type:'warning'
             });
           });
+        // 注册
+        }else {
+          const data = {
+            name:this.name,
+            password:this.password,
+            date:dayjs(Date.now()).format('YYYY-M-D') 
+          }
+          this.getRegister(data)
+            .then(value => {
+              Message({
+                message:value,
+                type:'success'
+              })
+              this.$router.push('/dashboard');
+            })
+            .catch(err => {
+              Message({
+                message:err,
+                type:'warning'
+              })
+            })
         }
       },
       changeStatus(){

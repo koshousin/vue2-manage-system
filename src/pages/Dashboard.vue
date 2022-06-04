@@ -5,11 +5,11 @@
           :size="100"
           icon="el-icon-user-solid"></Avatar>
         <div class="user-info">
-          <div class="username">Admin</div>
-          <div class="desc">超级管理员</div>
+          <div class="username">{{userInfo.name}}</div>
+          <div class="desc">{{userInfo.name === 'admin' ? '超级管理员' : '客户'}}</div>
         </div>
         <div class="line"></div>
-        <div class="login-info">上次登录事件：2019-11-01</div>
+        <div class="login-info">注册时间：{{userInfo.date}}</div>
         <div class="login-info">上次登录地点：长沙</div>
       </div>
       <div class="item two">
@@ -79,6 +79,7 @@
     </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   import {Avatar,Progress,Checkbox,Button} from 'element-ui';
   import {nanoid} from 'nanoid'
   import { Bar,Line as MyLine} from 'vue-chartjs/legacy'
@@ -187,7 +188,11 @@
           },
         ]
       }
-    }
+    },
+    computed:{
+      ...mapState('loginAbout',['userInfo'])
+    },
+    
   }
 </script>
 <style scoped>

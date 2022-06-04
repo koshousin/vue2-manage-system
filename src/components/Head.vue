@@ -17,7 +17,7 @@
       trigger="click" 
       @command="handleExit">
       <span class="el-dropdown-link">
-        admin<i class="el-icon-arrow-down el-icon--right"></i>
+        {{userInfo.name}}<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <DropdownMenu>
         <DropdownItem command="repo">
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
   import {Tooltip,Badge,Avatar,
     DropdownMenu,DropdownItem,Dropdown} from 'element-ui'
   import avatar from '../assets/img/avatar.jpg'
@@ -43,6 +44,9 @@
         isFold:false,
         isFullScreen:false
       }
+    },
+    computed:{
+      ...mapState('loginAbout',['userInfo'])
     },
     methods:{
       changeCollapse(){

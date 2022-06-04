@@ -15,14 +15,24 @@
     </div>
 </template>
 <script>
+  import {mapMutations} from 'vuex'
   import VHead from '../components/Head.vue'
   import VAside from '../components/SideBar.vue'
   import Tag from '../components/Tags.vue'
   export default {
     name:'Home' ,
     components : {VHead,VAside,Tag},
-    mounted(){
+    methods:{
+      ...mapMutations('loginAbout',{useLoginInfo:'HANDLE_LOGIN_INFO'})
+    },
+    beforeMount(){
       console.log('home mounted...');
+      const data = JSON.parse(localStorage.getItem('userInfo'));
+      if(!data){
+        this.$router.replace('/login');
+      }else {
+        this.useLoginInfo(data);
+      }
     }
   }
 </script>

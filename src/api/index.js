@@ -5,7 +5,6 @@ const BASE_URL = '/api'
 /* 直接前台请求 */
 export const reqPersons = () => ajax('/persons');
 
-
 /* 后台请求 */
 // 用户请求
 export const reqLogin = ({ name, password }) => ajax(BASE_URL + '/users/login',{ name, password });

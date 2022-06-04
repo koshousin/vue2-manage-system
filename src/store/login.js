@@ -15,14 +15,22 @@ export default {
       //console.log('getLoginInfo', result);
       if (result.code === 0) {
         commit('HANDLE_LOGIN_INFO', result.data);
-        return Promise.resolve("登录成功");
+        localStorage.setItem("userInfo",JSON.stringify(result.data));
+        return Promise.resolve(result.msg);
       } else {
-        //console.log('请求失败。。');
         return Promise.reject(result.msg);
       }
     },
-    async getRegister() {
-      
+    async getRegister({commit},data) {
+      const result = await reqRegister(data);
+      //console.log('getLoginInfo', result);
+      if (result.code === 0) {
+        commit("HANDLE_LOGIN_INFO", result.data);
+        localStorage.setItem("userInfo", JSON.stringify(result.data));
+        return Promise.resolve(result.msg);
+      } else {
+        return Promise.reject(result.msg);
+      }
     }
   },
   mutations: {

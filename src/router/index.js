@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 // const {$bus:_bus} = Vue.prototype;
 
 const router = new VueRouter({
-  mode: "hash",
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -131,14 +131,14 @@ const router = new VueRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.isAuth) {
-    next();
-  } else {
-    next();
-  }
+// router.beforeEach((to, from, next) => {
+//   if (to.meta.isAuth) {
+//     next();
+//   } else {
+//     next();
+//   }
  
-});
+// });
 /* 利用后置路由守卫添加标签 */
 router.afterEach((to, from) => {
   if (to.name == from.name) {

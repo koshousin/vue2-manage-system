@@ -12,11 +12,26 @@
     </div>
 </template>
 <script>
+  import {mapState} from 'vuex'
   import {Breadcrumb,
-          BreadcrumbItem} from 'element-ui'
+          BreadcrumbItem,Message} from 'element-ui'
   export default {
     name:'Permission',
-    components : {Breadcrumb,BreadcrumbItem}
+    components : {Breadcrumb,BreadcrumbItem},
+    computed:{
+      ...mapState('loginAbout',['userInfo'])
+    },
+    beforeMount(){
+      if(this.userInfo.name !== 'admin'){
+        setTimeout(() => {
+          this.$router.replace('/dashboard');
+        },3000)
+        Message({
+          type:'warning',
+          message:'暂无权限，3秒后跳转'
+        }); 
+      }
+    }
   }
 </script>
 <style scoped>

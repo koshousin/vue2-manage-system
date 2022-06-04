@@ -119,11 +119,10 @@
       methods:{
         ...mapActions('personAbout',['getPersonList']),
         handleSelectionChange(){
-        
         }
       },
       mounted(){
-        this.getPersonList();
+        !this.persons.list.length && this.getPersonList();
       }
   }
 </script>
