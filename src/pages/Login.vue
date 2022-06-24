@@ -114,6 +114,7 @@
                 message:value,
                 type:'success'
               })
+              this.$router.push('/dashboard');
             })
         }
       },

@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 // const {$bus:_bus} = Vue.prototype;
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   routes: [
     {
       path: "/",
