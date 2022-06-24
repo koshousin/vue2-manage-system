@@ -59,7 +59,7 @@
       }
     },
     methods:{
-      ...mapActions('loginAbout',['getLoginInfo','getRegister']),
+      ...mapActions('loginAbout',['getLoginInfo','getRegisterProd']),
       onSubmit(){
         if(!this.name || !this.password){
           Message({
@@ -94,18 +94,25 @@
             password:this.password,
             date:dayjs(Date.now()).format('YYYY-M-D') 
           }
-          this.getRegister(data)
+          // this.getRegister(data)
+          //   .then(value => {
+          //     Message({
+          //       message:value,
+          //       type:'success'
+          //     })
+          //     this.$router.push('/dashboard');
+          //   })
+          //   .catch(err => {
+          //     Message({
+          //       message:err,
+          //       type:'warning'
+          //     })
+          //   })
+          this.getRegisterProd(data)
             .then(value => {
               Message({
                 message:value,
                 type:'success'
-              })
-              this.$router.push('/dashboard');
-            })
-            .catch(err => {
-              Message({
-                message:err,
-                type:'warning'
               })
             })
         }
